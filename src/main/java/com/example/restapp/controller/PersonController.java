@@ -51,7 +51,8 @@ public class PersonController {
 						Short.parseShort(postcodeMax.getPostcodeNumber()))
 				.stream().map(Person::fromEntity).collect(Collectors.toList());
 		List<String> names = peopleInRange.stream()
-				.map(person -> person.getName()).collect(Collectors.toList());
+				.map(person -> person.getName()).sorted()
+				.collect(Collectors.toList());
 		Integer totalNameCharacters = names.stream().map(name -> name.length())
 				.reduce(0, Integer::sum);
 		return ResponseEntity.ok(new NamesInRange(names, totalNameCharacters));
